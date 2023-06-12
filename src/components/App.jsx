@@ -5,6 +5,7 @@ import { Button } from 'components/Button/Button';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Loader } from 'components/Loader/Loader';
 import { Modal } from 'components/Modal/Modal';
+import { Searchbar } from './SearchBar/SearchBar';
 // import { Searchbar } from 'components/Searchbar/Searchbar';
 
 export class App extends Component {
@@ -99,7 +100,7 @@ export class App extends Component {
           }}
         />
 
-        {/* <Searchbar handleSubmit={this.handleSubmit} /> */}
+        <Searchbar handleSubmit={this.handleSubmit} />
 
         {error && (
           <h2 style={{ textAlign: 'center' }}>
