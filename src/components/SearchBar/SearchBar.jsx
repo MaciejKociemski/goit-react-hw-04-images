@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { toast } from 'react-hot-toast';
 import { MdImageSearch } from 'react-icons/md';
-// import css from './Searchbar.module.css';
 import css from './SearchBar.module.css'
 
 export class Searchbar extends Component {
