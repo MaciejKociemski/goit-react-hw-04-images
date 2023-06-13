@@ -1,54 +1,49 @@
-import { Component } from 'react';
+import  React,{useState} from 'react';
 import { toast } from 'react-hot-toast';
 import { MdImageSearch } from 'react-icons/md';
-import css from './SearchBar.module.css'
+import css from './SearchBar.module.css';
 
-export class Searchbar extends Component {
-  state = {
-    search: '',
+export const Searchbar = ({ handleSubmit }) => {
+  const [search, setSearch] = useState('');
+
+  const onChangeInput = e => {
+    const value = e.currentTarget.value;
+    setSearch(value);
   };
 
-  onChangeInput = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
+  const resetForm = () => {
+    setSearch('');
   };
 
-  resetForm = () => {
-    this.setState({ search: '' });
+  const onSubmitForm = e => {
+    e.preventDefault();
+
+    if (!search) {
+      return toast.error('Enter text for search.');
+    }
+
+    handleSubmit(search);
+    resetForm();
   };
 
-  render() {
-    return (
-      <header className={css.SearchBar}>
-        <form
-          onSubmit={e => {
-            e.preventDefault();
+  return (
+    <header className={css.SearchBar}>
+      <form onSubmit={onSubmitForm} className={css.Form}>
+        <button type="submit" className={css.Button}>
+          <MdImageSearch size="30" />
+        </button>
 
-            if (!this.state.search) {
-              return toast.error('Enter text for search.');
-            }
-
-            this.props.handleSubmit(this.state.search);
-            this.resetForm();
-          }}
-          className={css.Form}
-        >
-          <button type="submit" className={css.Button}>
-            <MdImageSearch size="30" />
-          </button>
-
-          <input
-            value={this.state.search}
-            onChange={this.onChangeInput}
-            className={css.Input}
-            autoFocus
-            name="search"
-            type="text"
-            autoComplete="off"
-            placeholder="Search images or photos"
-          />
-        </form>
-      </header>
-    );
-  }
-}
+        <input
+          value={search}
+          onChange={onChangeInput}
+          className={css.Input}
+          autoFocus
+          name="search"
+          type="text"
+          autoComplete="off"
+          placeholder="Search images or photos"
+        />
+      </form>
+    </header>
+  );
+};
